@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ProductoService } from '../servicio/producto.service';
 
 
 @Component({
@@ -12,10 +12,11 @@ export class ListaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre'];
   dataSource = [];
 
-  constructor() { }
+  constructor(private productoService: ProductoService) { }
 
   ngOnInit(): void {
-    
+    this.productoService.obtenerProductos().subscribe(respuesta => {
+      this.dataSource = respuesta as any
+    })
   }
-
 }
